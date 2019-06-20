@@ -6,7 +6,7 @@ module Api
         render jsonapi: seasons,
                include: [:episodes],
                fields: { episodes: %i[title plot] },
-               cache: Rails.cache.fetch(Season.cache_key(seasons)) do
+               cache: Rails.cache.fetch(seasons.cache_key) do
                  seasons.to_json(include: :comments, method: :episodes_number_order)
                end
       end
